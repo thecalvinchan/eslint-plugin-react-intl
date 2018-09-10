@@ -1,0 +1,30 @@
+{
+  "name": "eslint-plugin-react-intl",
+  "version": "0.0.1",
+  "description": "ESLint rules for using react intl",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin"
+  ],
+  "author": "Calvin Chan <calvin.chan.h@gmail.com>",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha tests --recursive --require @babel/register"
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "requireindex": "~1.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "eslint": "5.5.0",
+    "mocha": "5.2.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "ISC"
+}
