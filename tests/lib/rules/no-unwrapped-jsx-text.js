@@ -27,21 +27,48 @@ var ruleTester = new RuleTester({
 ruleTester.run('no-unwrapped-jsx-text', rule, {
   valid: [
     {
-      code: 'const a = <FormattedMessage defaultMessage="asdf" />',
+      code: `import { FormattedMessage } from 'react-intl'
+const a = <FormattedMessage defaultMessage="asdf" />`,
     },
     // give me some code that won't trigger a warning
   ],
 
   invalid: [
     {
-      code: 'const a = <div>asdf</div>',
+      code: `// @flow
+const a = <div>asdf</div>`,
       errors: [
         {
           message: 'JSXText should not be rendered without FormattedMessage',
           type: 'JSXElement',
         },
       ],
-      output: 'const a = <div><FormattedMessage defaultMessage="asdf" /></div>',
+      output: `// @flow
+import { FormattedMessage } from 'react-intl'
+const a = <div><FormattedMessage defaultMessage="asdf" /></div>`,
+    },
+    {
+      code: `const a = <div>asdf</div>`,
+      errors: [
+        {
+          message: 'JSXText should not be rendered without FormattedMessage',
+          type: 'JSXElement',
+        },
+      ],
+      output: `import { FormattedMessage } from 'react-intl'
+const a = <div><FormattedMessage defaultMessage="asdf" /></div>`,
+    },
+    {
+      code: `import { defineMessages } from 'react-intl'
+const a = <div>asdf</div>`,
+      errors: [
+        {
+          message: 'JSXText should not be rendered without FormattedMessage',
+          type: 'JSXElement',
+        },
+      ],
+      output: `import { defineMessages, FormattedMessage } from 'react-intl'
+const a = <div><FormattedMessage defaultMessage="asdf" /></div>`,
     },
   ],
 })
